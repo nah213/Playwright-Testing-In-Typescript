@@ -29,7 +29,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm init playwright@latest --yes -- --quiet"
+	"postCreateCommand": "mv playwright.config.ts temp-playwright.config.ts && npm init playwright@latest --yes -- --quiet --no-examples --lang=TypeScript --install-deps && rm playwright.config.ts && mv temp-playwright.config.ts playwright.config.ts"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
