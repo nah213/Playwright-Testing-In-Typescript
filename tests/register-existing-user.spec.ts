@@ -1,7 +1,7 @@
 import { test, expect, chromium } from '@playwright/test';
 import { v4 as uuidv4 } from 'uuid';
 
-test.describe('Login User Tests', () => {
+test.describe('Register Existing User Tests', () => {
 	const userEmailAddress = `test+${uuidv4()}@test.com`;
 	const userPassword = 'Password123#';
 
@@ -51,27 +51,14 @@ test.describe('Login User Tests', () => {
 		await expect(page).toHaveTitle('Automation Exercise - Signup / Login');
 	});
 
-	test('After filling in email and password then selecting login the user is sent back to the home page.', async ({ page }) => {
+	test('After filling in name and email with existing email then selecting login the user is presented with an error.', async ({ page }) => {
 		await page.goto('https://automationexercise.com');
 		await page.getByRole('link', { name: ' Signup / Login' }).click();
 
-		await page.locator('[data-qa="login-email"]').fill(userEmailAddress);
-		await page.locator('[data-qa="login-password"]').fill(userPassword);
-		await page.locator('[data-qa="login-button"]').click();
+		await page.locator('[data-qa="signup-name"]').fill('New User');
+		await page.locator('[data-qa="signup-email"]').fill(userEmailAddress);
+		await page.locator('[data-qa="signup-button"]').click();
 
-		await expect(page).toHaveTitle('Automation Exercise');
-		await expect(page.locator('.fa-user').locator('xpath=..')).toHaveText('Logged in as New User', { useInnerText: true });
-	});
-
-	test('Selecting the delete account link in the header sends the user to the account deleted page.', async ({ page }) => {
-		await page.goto('https://automationexercise.com');
-		await page.getByRole('link', { name: ' Signup / Login' }).click();
-		await page.locator('[data-qa="login-email"]').fill(userEmailAddress);
-		await page.locator('[data-qa="login-password"]').fill(userPassword);
-		await page.locator('[data-qa="login-button"]').click();
-		
-		await page.getByRole('link', { name: ' Delete Account' }).click();
-
-		await expect(page.locator('[data-qa="account-deleted"]')).toHaveText('ACCOUNT DELETED!', { useInnerText: true });
+		await expect(page.locator('[action="/signup"]').locator('p')).toHaveText('Email Address already exist!', { useInnerText: true });
 	});
 });
