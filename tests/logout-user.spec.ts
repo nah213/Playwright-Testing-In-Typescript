@@ -65,7 +65,7 @@ test.describe('Logout User Tests', () => {
 		await expect(page).toHaveTitle('Automation Exercise - Signup / Login');
 	});
 
-	test('After filling in name and email the selecting login the user is sent back to the home page.', async ({ page }) => {
+	test('After filling in email and password then selecting login the user is sent back to the home page.', async ({ page }) => {
 		await page.goto('https://automationexercise.com');
 		await page.getByRole('link', { name: ' Signup / Login' }).click();
 

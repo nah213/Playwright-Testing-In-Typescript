@@ -16,7 +16,7 @@ test.describe('Register User Tests', () => {
 		await expect(page).toHaveTitle('Automation Exercise - Signup / Login');
 	});
 
-	test('After filling in name and email the selecting signup the user is sent to the singup page.', async ({ page }) => {
+	test('After filling in name and email then selecting signup the user is sent to the singup page.', async ({ page }) => {
 		await page.goto('https://automationexercise.com');
 		await page.getByRole('link', { name: ' Signup / Login' }).click();
 

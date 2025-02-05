@@ -15,7 +15,7 @@ test.describe('Incorrect Login User Tests', () => {
 		await expect(page).toHaveTitle('Automation Exercise - Signup / Login');
 	});
 
-	test('After filling in name and email with incorrect values and selecting login the user is presented with error message.', async ({ page }) => {
+	test('After filling in email and password with incorrect values and selecting login the user is presented with error message.', async ({ page }) => {
 		await page.goto('https://automationexercise.com');
 		await page.getByRole('link', { name: ' Signup / Login' }).click();
 
